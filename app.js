@@ -96,7 +96,7 @@ app.post('/challenge', function( req, res, next) {
 	{
 	    personChallenged = userName;
 	}
-    if(exercice === undefined || exercice === "")
+    if(exercice !== undefined || exercice !== "")
     {
 	rock.TheRoc.SendExerciceToUser(personChallenged,exercice);
     }
