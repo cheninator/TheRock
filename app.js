@@ -89,11 +89,20 @@ app.post('/done', function (req, res, next) {
 
 app.post('/challenge', function( req, res, next) {
     var userName = req.body.user_name;
-    var personChallenged = req.body.text;
+    var information = req.body.text.split(" ");
+    var personChallenged = information[0];
+    var exercice = information[1];
     if(personChallenged === undefined || personChallenged === "")
 	{
 	    personChallenged = userName;
 	}
+    if(exercice === undefined || exercice === "")
+    {
+	rock.TheRoc.SendExerciceToUser(personChallenged,exercice);
+    }
+    
+
+
     rock.TheRock.SendRandomExerciceToUser(personChallenged);
     var botPayload = {
 	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'

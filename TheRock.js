@@ -129,6 +129,38 @@ exports.TheRock = {
 	//this.SendMessageTolUser(exercice.id, 'New exercice');
 	this.SendInformation(user, exercice);
     },
+
+   SendExerciceToUser: function(userName,exerciceName) {
+       var user;
+       var exercice;
+	// Find the user id 
+	for (var i = 0; i < this.collectionUser.length; i++){
+	    if (this.collectionUser[i].name === userName){
+		user = this.collectionUser[i];
+		break;
+	    }
+	}
+	for (var i = 0; i < this.exercice.length; i++){
+	    if (this.exercice[i].name === exerciceName){
+		exercice = this.exercice[i];
+		break;
+	    }
+	}
+	// Check if the user doesn't already have a challenge
+	for (var i = 0; i < this.challenge.length; i++){
+	    if (this.challenge[i].user.name === user.name){
+		console.log("User already challenged");
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + "already has a challenge ";
+		this.SendMessageToChannel(this.generalChannel.id, 
+					  generalMessage);
+		// abort
+		return;
+	    }
+	}	
+
+	//this.SendMessageTolUser(exercice.id, 'New exercice');
+	this.SendInformation(user, exercice);
+    },
     SendRandomExercice: function() {
 	var exercice = this.GenerateRandomExercice();
 	var user = this.GenerateRandomUser();
