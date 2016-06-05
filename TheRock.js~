@@ -1,0 +1,7 @@
+exports.TheRock;
+var TheRock;
+TheRock.botToken = "xoxb-47479903523-gaLKyAXynsBsCEWWuqyW2Gt0";
+TheRock.SendMessageToChannel = function (channelId, text){
+
+
+}

@@ -1,0 +1,4 @@
+var exercice = require('exercice');
+exports.Challenge = {
+    
+}

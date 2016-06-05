@@ -1,0 +1,10 @@
+
+exports.ChannelCollection = {
+    
+    channels : [],
+
+    getChannelById : function(id) {
+	var result;
+    }
+    
+}
