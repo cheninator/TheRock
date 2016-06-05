@@ -201,5 +201,13 @@ exports.TheRock = {
 		
 	    }
 	}
+	var i = this.challenge.length;
+	while(i--){
+	    if (this.challenge[i].user.name === username){
+		console.log("Found the challenger and am removing it");
+		// Remove the challenge from the queue
+		this.challenge.splice(i,1);
+	    }
+	}
     }
 }
