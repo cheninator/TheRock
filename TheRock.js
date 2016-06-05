@@ -222,7 +222,7 @@ exports.TheRock = {
 	this.challengeCounter += 1;
     },
     SendInformationChallenge : function(user, exercice, from){
-	var generalMessage = "<@" + from.id + "> " + "has challenge " + "<@" + user.id + ">" + " : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
+	var generalMessage = "<@" + from + "> " + "has challenge " + "<@" + user.id + ">" + " : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
 	console.log("User with the challenge : " + user.name);
 	for(var i = 0; i < this.collectionChannel.length; ++i)
 	{
