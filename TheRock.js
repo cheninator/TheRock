@@ -9,35 +9,35 @@ exports.TheRock = {
 	    "name": "pushups",
 	    "minReps": 10,
 	    "maxReps": 50,
-	    "units": "rep"
+	    "units": "reps"
 	},
 	{
 	    "id": 1,
 	    "name": "planks",
 	    "minReps": 40,
 	    "maxReps": 60,
-	    "units": "second"
+	    "units": "seconds"
 	},
 	{
 	    "id": 2,
 	    "name": "wall-sit",
 	    "minReps": 40,
 	    "maxReps": 60,
-	    "units": "second"
+	    "units": "seconds"
 	},
 	{
 	    "id": 3,
 	    "name": "chair-dips",
 	    "minReps": 15,
 	    "maxReps": 50,
-	    "units": "rep"
+	    "units": "reps"
 	},
 	{
 	    "id": 4,
 	    "name": "jumping-jacks",
 	    "minReps": 20,
 	    "maxReps": 40,
-	    "units": "rep"
+	    "units": "reps"
 	}
     ],
     challengeCounter : 0,
