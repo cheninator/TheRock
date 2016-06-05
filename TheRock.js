@@ -136,7 +136,7 @@ exports.TheRock = {
 	this.SendInformation(user,exercice);
     },
     SendInformation : function(user, exercice){
-	var generalMessage = "<@" + user.id + ">" + " has a new challenge : ";
+	var generalMessage = "<@" + user.id + ">" + " has a new challenge : "+ exercice.name;
 	console.log("User with the challenge : " + user.name);
 	for(var i = 0; i < this.collectionChannel.length; ++i)
 	{
@@ -145,9 +145,7 @@ exports.TheRock = {
 	}
 
         this.SendMessageToChannel(this.generalChannel.id, generalMessage);
-	
-
-	this.SendMessageToChannel(user.id, 'New exercice');
+	this.SendMessageToChannel(user.id, generalMessage);
 	this.challenge.push(
 	    {
 		id : this.challengeCounter,
@@ -161,7 +159,7 @@ exports.TheRock = {
 	setTimeout(function(){
 	    //console.log(that);
 	    that.GetCompletion(val);
-	},10000);
+	},60000);
 	this.challengeCounter += 1;
 
     },
@@ -173,11 +171,11 @@ exports.TheRock = {
 	    if (this.challenge[i].id === id){
 		console.log("Found the challenge");
 		if (this.challenge[i].is_done === true){
-		    var generalMessage = "<@" + this.challenge[i].user.id + ">" + " has suceeded ";
+		    var generalMessage = "Time is up : <@" + this.challenge[i].user.id + ">" + " has suceeded ";
 		            this.SendMessageToChannel(this.generalChannel.id, 
 						     generalMessage);
 		} else {
-		    var generalMessage = "<@" + this.challenge[i].user.id + ">" + " has failed ";
+		    var generalMessage = "Time is up : <@" + this.challenge[i].user.id + ">" + " has failed ";
 		            this.SendMessageToChannel(this.generalChannel.id, 
 						     generalMessage);   
 		}
@@ -197,7 +195,7 @@ exports.TheRock = {
 	    if (this.challenge[i].user.name === username){
 		console.log("Found the challenge");
 		this.challenge[i].is_done = true;
-		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has succeeded ";
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has completed the challenge. ";
 		this.SendMessageToChannel(this.generalChannel.id, 
 					  generalMessage);
 		

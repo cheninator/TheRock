@@ -70,7 +70,10 @@ app.post('/booty', function (req, res, next) {
 app.post('/done', function (req, res, next) {
     var userName = req.body.user_name;
     var personCompleted = req.body.text;
-    rock.TheRock.FinishedTask(personCompleted);
+    if(userName !== personCompleted){
+	rock.TheRock.FinishedTask(personCompleted);
+    }
+    
     var botPayload = {
 	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
 	text : "This is my response"
