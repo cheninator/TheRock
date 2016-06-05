@@ -2,7 +2,7 @@ var request = require('superagent');
 var ex = require('./Exercice')
 
 exports.TheRock = {
-    token : 0,// TODO PUT TOKEN;
+    token : "xoxb-48226578020-7oVuz7mbmKRwjs9yIHxFWGK3",
     exercice : [
 	{
 	    "id": 0,
@@ -101,16 +101,43 @@ exports.TheRock = {
         }
         return user;
     },
-    SendRandomExerciceToUser: function(userId) {
+
+    
+
+    SendRandomExerciceToUser: function(userName) {
+	var user;
+	// Find the user id 
+	for (var i = 0; i < this.collectionUser.length; i++){
+	    if (this.collectionUser[i].name === userName){
+		user = this.collectionUser[i];
+		break;
+	    }
+	}
+	// Check if the user doesn't already have a challenge
+	for (var i = 0; i < this.challenge.length; i++){
+	    if (this.challenge[i].user.name === user.name){
+		console.log("User already challenged");
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has a challenge ";
+		this.SendMessageToChannel(this.generalChannel.id, 
+					  generalMessage);
+		// abort
+		return;
+	    }
+	}	
+
 	var exercice = this.GenerateRandomExercice();
-	this.SendMessageTolUser(exercice.id, 'New exercice');
+	//this.SendMessageTolUser(exercice.id, 'New exercice');
+	this.SendInformation(user, exercice);
     },
     SendRandomExercice: function() {
 	var exercice = this.GenerateRandomExercice();
 	var user = this.GenerateRandomUser();
 
+	this.SendInformation(user,exercice);
+    },
+    SendInformation : function(user, exercice){
 	var generalMessage = "<@" + user.id + ">" + " has a new challenge : ";
-	
+	console.log("User with the challenge : " + user.name);
 	for(var i = 0; i < this.collectionChannel.length; ++i)
 	{
 	    if(this.collectionChannel[i].name === "general")
@@ -141,7 +168,8 @@ exports.TheRock = {
 
     GetCompletion : function(id){
 	console.log("GetCompletionElapsed : id is" + id);
-	for (var i = 0; i < this.challenge.length; i++){
+	var i = this.challenge.length;
+	while(i--){
 	    if (this.challenge[i].id === id){
 		console.log("Found the challenge");
 		if (this.challenge[i].is_done === true){
@@ -151,9 +179,28 @@ exports.TheRock = {
 		} else {
 		    var generalMessage = "<@" + this.challenge[i].user.id + ">" + " has failed ";
 		            this.SendMessageToChannel(this.generalChannel.id, 
-						     generalMessage);
-	
+						     generalMessage);   
 		}
+		// Remove the challenge from the queue
+		this.challenge.splice(i,1);
+	    }
+	}
+
+	// Restart the lottery
+	this.SendRandomExercice();
+	
+    },
+    
+    FinishedTask : function(username){
+	console.log("Finished task invoked with : " + username);
+	for (var i = 0; i < this.challenge.length; i++){
+	    if (this.challenge[i].user.name === username){
+		console.log("Found the challenge");
+		this.challenge[i].is_done = true;
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has succeeded ";
+		this.SendMessageToChannel(this.generalChannel.id, 
+					  generalMessage);
+		
 	    }
 	}
     }

@@ -43,18 +43,6 @@ app.post('/hello', function (req, res, next) {
     var userName = req.body.user_name;
     var botPayload = {
 	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
-	text : req.body.token
-    };
-    // Loop otherwise..
-    if (userName !== 'slackbot') {
-	console.log('Listening on port ' + port);
-    }});
-
-app.post('/hello', function (req, res, next) {
-    console.log(req.body);
-    var userName = req.body.user_name;
-    var botPayload = {
-	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
 	text : req.body.token	
     };
     // Loop otherwise..
@@ -79,24 +67,38 @@ app.post('/booty', function (req, res, next) {
 });
 
 
-app.post('/booty', function (req, res, next) {
-  var userName = req.body.user_name;
-  var botPayload = {
-    //text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
-    text : req.body	
-  };
-  // Loop otherwise..
-  if (userName !== 'slackbot') {
-    return res.status(200).json(botPayload);
-  } else {
-    return res.status(200).end();
-  }
+app.post('/done', function (req, res, next) {
+    var userName = req.body.user_name;
+    var personCompleted = req.body.text;
+    rock.TheRock.FinishedTask(personCompleted);
+    var botPayload = {
+	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
+	text : req.body	
+    };
+    // Loop otherwise..
+    if (userName !== 'slackbot') {
+	return res.status(200).json(botPayload);
+    } else {
+	return res.status(200).end();
+    }
 });
 
 
-app.post('/done', function( req, res, next) {
-  
-  var validatedUser = req.body.text;
+app.post('/challenge', function( req, res, next) {
+    var userName = req.body.user_name;
+    var personChallenged = req.body.text;
+
+    rock.TheRock.SendRandomExerciceToUser(personChallenged);
+    var botPayload = {
+	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
+	text : req.body	
+    };
+    // Loop otherwise..
+    if (userName !== 'slackbot') {
+	return res.status(200).json(botPayload);
+    } else {
+	return res.status(200).end();
+    }
 });
 
 
