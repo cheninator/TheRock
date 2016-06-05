@@ -2,7 +2,7 @@ var request = require('superagent');
 var ex = require('./Exercice')
 
 exports.TheRock = {
-    token : "xoxb-47479903523-gaLKyAXynsBsCEWWuqyW2Gt0",
+    token : 0,// TODO PUT TOKEN;
     exercice : [
 	{
 	    "id": 0,
@@ -40,6 +40,7 @@ exports.TheRock = {
 	    "units": "rep"
 	}
     ],
+    challengeCounter : 0,
     collectionUser: [],
     collectionChannel: [],
     challenge: [],
@@ -108,14 +109,6 @@ exports.TheRock = {
 	var exercice = this.GenerateRandomExercice();
 	var user = this.GenerateRandomUser();
 
-	this.SendMessageToChannel(user.id, 'New exercice');
-	this.challenge.push(
-	    {
-		exercice: exercice,
-		user: user, 
-		duree: 2,
-		is_done: false;
-	    });
 	var generalMessage = "<@" + user.id + ">" + " has a new challenge : ";
 	
 	for(var i = 0; i < this.collectionChannel.length; ++i)
@@ -126,5 +119,42 @@ exports.TheRock = {
 
         this.SendMessageToChannel(this.generalChannel.id, generalMessage);
 	
+
+	this.SendMessageToChannel(user.id, 'New exercice');
+	this.challenge.push(
+	    {
+		id : this.challengeCounter,
+		exercice: exercice,
+		user: user, 
+		duree: 2,
+		is_done: false
+	    });
+	var that = this;
+	var val = this.challengeCounter;
+	setTimeout(function(){
+	    //console.log(that);
+	    that.GetCompletion(val);
+	},10000);
+	this.challengeCounter += 1;
+
+    },
+
+    GetCompletion : function(id){
+	console.log("GetCompletionElapsed : id is" + id);
+	for (var i = 0; i < this.challenge.length; i++){
+	    if (this.challenge[i].id === id){
+		console.log("Found the challenge");
+		if (this.challenge[i].is_done === true){
+		    var generalMessage = "<@" + this.challenge[i].user.id + ">" + " has suceeded ";
+		            this.SendMessageToChannel(this.generalChannel.id, 
+						     generalMessage);
+		} else {
+		    var generalMessage = "<@" + this.challenge[i].user.id + ">" + " has failed ";
+		            this.SendMessageToChannel(this.generalChannel.id, 
+						     generalMessage);
+	
+		}
+	    }
+	}
     }
 }

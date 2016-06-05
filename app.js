@@ -20,7 +20,9 @@ var port = process.env.PORT || 1337;
 //console.log(ex.Exercice.generateExercice(10,50,"running", "miles"));
 rock.TheRock.retrieveChannels(function(err, res) {
     rock.TheRock.collectionChannel = res.body.channels;
+    console.log('Main channels :' + rock.TheRock.collectionChannel);
     rock.TheRock.retrieveUsers(function(er, ress) {
+	console.log('Main members :' + ress.body.members);
 	rock.TheRock.collectionUser = ress.body.members;
 	rock.TheRock.SendRandomExercice();
     });
