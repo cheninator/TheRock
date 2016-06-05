@@ -20,21 +20,21 @@ exports.TheRock = {
 	},
 	{
 	    "id": 2,
-	    "name": "wall sit",
+	    "name": "wall-sit",
 	    "minReps": 40,
 	    "maxReps": 60,
 	    "units": "second"
 	},
 	{
 	    "id": 3,
-	    "name": "chair dips",
+	    "name": "chair-dips",
 	    "minReps": 15,
 	    "maxReps": 50,
 	    "units": "rep"
 	},
 	{
 	    "id": 4,
-	    "name": "jumping jacks",
+	    "name": "jumping-jacks",
 	    "minReps": 20,
 	    "maxReps": 40,
 	    "units": "rep"
