@@ -126,12 +126,19 @@ exports.TheRock = {
 	//this.SendMessageTolUser(exercice.id, 'New exercice');
 	this.SendInformation(user, exercice);
     },
-    SendChallengeToUser: function(userName, from){
+    SendChallengeToUser: function(userName, exerciceName, from){
 	var user;
+	var exercice;
 	// Find the user id 
 	for (var i = 0; i < this.collectionUser.length; i++){
 	    if (this.collectionUser[i].name === userName){
 		user = this.collectionUser[i];
+		break;
+	    }
+	}	
+	for (var i = 0; i < this.exercice.length; i++){
+	    if (this.exercice[i].name === exerciceName){
+		exercice = this.exercice[i];
 		break;
 	    }
 	}
@@ -147,7 +154,6 @@ exports.TheRock = {
 	    }
 	}	
 
-	var exercice = this.GenerateRandomExercice();
 	//this.SendMessageTolUser(exercice.id, 'New exercice');
 	this.SendInformationChallenge(user, exercice, from);
     },
