@@ -102,33 +102,23 @@ app.post('/challenge', function( req, res, next) {
 });
 
 
-app.post('/stat', function( req, res, next) {
-  
-  
-});
+//////////////////////////////////////////////////////
+// app.post('/stat', function( req, res, next) {    //
+//   						    //
+//   						    //
+// });						    //
+// 						    //
+// 						    //
+// app.post('/shame', function( req, res, next) {   //
+//   						    //
+//     var text = req.body.text;		    //
+// });						    //
+// 						    //
+// 						    //
+// app.post('/success', function( req, res, next) { //
+//   						    //
+//   						    //
+// });						    //
+//////////////////////////////////////////////////////
 
 
-app.post('/shame', function( req, res, next) {
-  
-    var text = req.body.text;
-});
-
-
-app.post('/success', function( req, res, next) {
-  
-  
-});
-
-app.post('/challenge', function( req, res, next) {
-  
-    var challengeString = req.body.text;
-    // Parse the challenge string
-    var challengeInformation;
-    
-    
-
-});
-
-
-
-console.log("Hey");
