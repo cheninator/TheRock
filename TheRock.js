@@ -1,7 +1,7 @@
 var request = require('superagent');
 var ex = require('./Exercice')
 
-exports.TheRock = {
+exports.TheRock = { 
     token : "xoxb-48226578020-7oVuz7mbmKRwjs9yIHxFWGK3",
     exercice : [
 	{
