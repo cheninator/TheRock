@@ -98,7 +98,7 @@ app.post('/challenge', function( req, res, next) {
     }
     if(exercice === undefined || exercice === "")
     {
-	rock.TheRock.SendRandomExerciceToUser(personChallenged);
+	rock.TheRock.SendRandomExerciceToUser(personChallenged, userName);
     }
     else
     {

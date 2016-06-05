@@ -101,7 +101,7 @@ exports.TheRock = {
         }
         return user;
     },
-    SendRandomExerciceToUser: function(userName) {
+    SendRandomExerciceToUser: function(userName, from) {
 	var user;
 	// Find the user id 
 	for (var i = 0; i < this.collectionUser.length; i++){
@@ -124,7 +124,8 @@ exports.TheRock = {
 
 	var exercice = this.GenerateRandomExercice();
 	//this.SendMessageTolUser(exercice.id, 'New exercice');
-	this.SendInformation(user, exercice);
+	//this.SendInformation(user, exercice);
+	this.SendInformationChallenge(user, exercice, from);
     },
     SendChallengeToUser: function(userName, exerciceName, from){
 	var user;
@@ -222,7 +223,7 @@ exports.TheRock = {
 	this.challengeCounter += 1;
     },
     SendInformationChallenge : function(user, exercice, from){
-	var generalMessage = "<@" + from + "> " + "has challenge " + "<@" + user.id + ">" + " : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
+	var generalMessage = "<@" + from + "> " + "has challenged " + "<@" + user.id + ">" + " : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
 	console.log("User with the challenge : " + user.name);
 	for(var i = 0; i < this.collectionChannel.length; ++i)
 	{
