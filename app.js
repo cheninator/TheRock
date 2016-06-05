@@ -90,7 +90,7 @@ app.post('/done', function (req, res, next) {
 app.post('/challenge', function( req, res, next) {
     var userName = req.body.user_name;
     var personChallenged = req.body.text;
-    if(personChallenged === undefined)
+    if(personChallenged === undefined || personChallenged === "")
 	{
 	    personChallenged = userName;
 	}
