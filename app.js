@@ -93,19 +93,19 @@ app.post('/challenge', function( req, res, next) {
     var personChallenged = information[0];
     var exercice = information[1];
     if(personChallenged === undefined || personChallenged === "")
-	{
-	    personChallenged = userName;
-	}
+    {
+	personChallenged = userName;
+    }
     if(exercice === undefined || exercice === "")
     {
-	rock.TheRock.SendRandomExerciceToUser(personChallenged)
-
+	rock.TheRock.SendRandomExerciceToUser(personChallenged);
     }
     else
-{
-	rock.TheRoc.SendExerciceToUser(personChallenged,exercice);
-}
- ;
+    {
+	//rock.TheRock.SendExerciceToUser(personChallenged,exercice);
+	rock.TheRock.SendChallengeToUser(personChallenged,exercice, userName);
+    }
+    
     var botPayload = {
 	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
 	text : req.body	

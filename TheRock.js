@@ -101,9 +101,6 @@ exports.TheRock = {
         }
         return user;
     },
-
-    
-
     SendRandomExerciceToUser: function(userName) {
 	var user;
 	// Find the user id 
@@ -129,8 +126,32 @@ exports.TheRock = {
 	//this.SendMessageTolUser(exercice.id, 'New exercice');
 	this.SendInformation(user, exercice);
     },
+    SendChallengeToUser: function(userName, from){
+	var user;
+	// Find the user id 
+	for (var i = 0; i < this.collectionUser.length; i++){
+	    if (this.collectionUser[i].name === userName){
+		user = this.collectionUser[i];
+		break;
+	    }
+	}
+	// Check if the user doesn't already have a challenge
+	for (var i = 0; i < this.challenge.length; i++){
+	    if (this.challenge[i].user.name === user.name){
+		console.log("User already challenged");
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + "already has a challenge ";
+		this.SendMessageToChannel(this.generalChannel.id, 
+					  generalMessage);
+		// abort
+		return;
+	    }
+	}	
 
-   SendExerciceToUser: function(userName,exerciceName) {
+	var exercice = this.GenerateRandomExercice();
+	//this.SendMessageTolUser(exercice.id, 'New exercice');
+	this.SendInformationChallenge(user, exercice, from);
+    },
+    SendExerciceToUser: function(userName,exerciceName) {
        var user;
        var exercice;
 	// Find the user id 
@@ -150,7 +171,7 @@ exports.TheRock = {
 	for (var i = 0; i < this.challenge.length; i++){
 	    if (this.challenge[i].user.name === user.name){
 		console.log("User already challenged");
-		var generalMessage = "<@" + this.challenge[i].user.name + ">" + "already has a challenge ";
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " already has a challenge ";
 		this.SendMessageToChannel(this.generalChannel.id, 
 					  generalMessage);
 		// abort
@@ -193,7 +214,33 @@ exports.TheRock = {
 	    that.GetCompletion(val);
 	},600000);
 	this.challengeCounter += 1;
+    },
+    SendInformationChallenge : function(user, exercice, from){
+	var generalMessage = "<@" + from.id + "> " + "has challenge " + "<@" + user.id + ">" + " : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
+	console.log("User with the challenge : " + user.name);
+	for(var i = 0; i < this.collectionChannel.length; ++i)
+	{
+	    if(this.collectionChannel[i].name === "general")
+		this.generalChannel = this.collectionChannel[i];
+	}
 
+        this.SendMessageToChannel(this.generalChannel.id, generalMessage);
+	this.SendMessageToChannel(user.id, generalMessage);
+	this.challenge.push(
+	    {
+		id : this.challengeCounter,
+		exercice: exercice,
+		user: user, 
+		duree: 2,
+		is_done: false
+	    });
+	var that = this;
+	var val = this.challengeCounter;
+	setTimeout(function(){
+	    //console.log(that);
+	    that.GetCompletion(val);
+	},600000);
+	this.challengeCounter += 1;
     },
 
     GetCompletion : function(id){
@@ -227,7 +274,7 @@ exports.TheRock = {
 	    if (this.challenge[i].user.name === username){
 		console.log("Found the challenge");
 		this.challenge[i].is_done = true;
-		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has completed the challenge. ";
+		var generalMessage = "<@" + this.challenge[i].user.name + ">" + " has completed the challenge! ";
 		this.SendMessageToChannel(this.generalChannel.id, 
 					  generalMessage);
 		
