@@ -73,7 +73,7 @@ app.post('/done', function (req, res, next) {
     rock.TheRock.FinishedTask(personCompleted);
     var botPayload = {
 	//text : 'Hello ' + userName + ', welcome to Devdactic Slack channel! I\'ll be your guide.'
-	text : req.body	
+	text : "This is my response"
     };
     // Loop otherwise..
     if (userName !== 'slackbot') {
