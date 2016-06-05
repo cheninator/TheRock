@@ -136,7 +136,7 @@ exports.TheRock = {
 	this.SendInformation(user,exercice);
     },
     SendInformation : function(user, exercice){
-	var generalMessage = "<@" + user.id + ">" + " has a new challenge : "+ exercice.name + " : " + exercice.maxReps +" " + exercice.units;
+	var generalMessage = "<@" + user.id + ">" + " has a new challenge : "+ exercice.name + "  " + exercice.maxReps +" " + exercice.units;
 	console.log("User with the challenge : " + user.name);
 	for(var i = 0; i < this.collectionChannel.length; ++i)
 	{
