@@ -191,7 +191,7 @@ exports.TheRock = {
 	setTimeout(function(){
 	    //console.log(that);
 	    that.GetCompletion(val);
-	},60000);
+	},600000);
 	this.challengeCounter += 1;
 
     },
